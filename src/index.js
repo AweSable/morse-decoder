@@ -38,7 +38,14 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const codeTable = {};
+    Object.keys(MORSE_TABLE).map(el => codeTable[('00000000' + el.replaceAll('.', 10).replaceAll('-', 11)).slice(-10)] = MORSE_TABLE[el]);
+    codeTable['**********'] = ' ';
+    let res = '';
+    for (let i = 0; i < expr.length; i += 10){
+        res += codeTable[expr.substr(i, 10)];
+        }
+    return res;
 }
 
 module.exports = {
